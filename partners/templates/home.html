@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>Gappsexperts partners login</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Gappsexperts partners login</h1>
+    </div>
+    {% if user.is_authenticated %}
+    <hr>
+        <div class="row">
+            <div class="user-details">
+                You are logged in as <code>{{ user.username }}</code>(<code>{{ user.email }}</code>) !
+            </div>
+        </div>
+    {% endif %}
+
+    <hr>
+
+    <div class="row">
+        <div class="col-12 mx-auto text-center">
+            {% set name = 'google-oauth2' %}
+            {% if not associated.get(name) %}
+                <a id="{{ name }}-button" class="btn btn-default" name="google oauth2" href="{{ url("social:begin", backend=name) }}">
+                    <i class="fa fa-{{ name|icon_name }}"></i>Google OAuth2
+                </a>
+            {% else %}
+                <a class="btn btn-primary" href="/logout/" id="logout"><i class="fa fa-sign-out"></i>Logout</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+</div>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>

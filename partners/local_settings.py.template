@@ -1,0 +1,7 @@
+
+ALLOWED_HOSTS = ['localhost']
+
+SM_USER_TOKEN_URL = 'http://chch-billing.gappsexperts.com/api/userTokens/{}/'
+SM_LOGIN_URL = 'http://chch-billing.gappsexperts.com/accounts/login/?user_token={}'
+SM_USER = 'admin'
+SM_PASSWORD = 'password'
