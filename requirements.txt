@@ -3,3 +3,4 @@ django-jinja
 social-auth-core
 social-auth-app-django
 requests
+gunicorn

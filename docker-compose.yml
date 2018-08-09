@@ -1,36 +1,15 @@
 version: "2"
 services:
   runtime:
-    command: echo "Runtime initialized, exit now"
-    entrypoint: /bin/entrypoint.sh
-    depends_on:
-      - pg
-      - redis
-    ports:
-      - 80:80
-    environment:
-      PG_HOST: pg
-      REDIS_HOST: redis
-#      DJANGO_SETTINGS_MODULE: app.dev_settings
-      USE_DOCKER: 'True'
-#      XDG_CACHE_HOME: /var/cache/pip
-    image: partners/loginsite
+    command: gunicorn --config gunicorn.config partners.wsgi:application
     build: .
-    volumes:
-#      - python_libraries:/usr/local/lib/python2.7/site-packages
-#      - pip_cache:/var/cache/pip
-      - .:/app
-    working_dir: /app
-  redis:
-    image: redis:2
-  pg:
-    image: postgres:10.0
-    volumes:
-      - db-data:/var/lib/postgresql/data
+#    entrypoint: /bin/entrypoint.sh
+    image: partners/loginsite
     environment:
-      POSTGRES_DB: sm
-
-volumes:
-  db-data:
-  python_libraries: {}
-  pip_cache: {}
+      USE_DOCKER: 'True'
+    volumes:
+      - .:/app
+      - ../partners.log:/logs
+    ports:
+      - 8001:8000
+    working_dir: /app
